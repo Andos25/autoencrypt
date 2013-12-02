@@ -15,7 +15,7 @@ def encrypt(serveDir):
 			os.system('screw '+f)
 	os.chdir('..')
 if os.getuid():
-	print '请输入root密码'
+	print 'root password:'
 	args=[sys.executable]+sys.argv
 	os.execlp('su','su','-c',' '.join(args))
 encrypt('/usr/local/apache2/htdocs')
