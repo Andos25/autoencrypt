@@ -56,3 +56,4 @@ CreateLink
 Encrypt
 EncryptWebsite
 Clean
+echo "Install Complete! Welcome to MoJing's World"
