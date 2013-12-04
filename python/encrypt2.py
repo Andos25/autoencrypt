@@ -1,0 +1,52 @@
+#!/usr/bin/python
+#-*- coding: utf-8 -*-
+import os
+import sys
+def install():
+    os.system('tar -zxvf php_screw-1.5.tar.gz')
+    getroot()
+    os.chdir('php_screw-1.5')
+    os.system('phpize')
+    os.system('./configure --with-php-config=/usr/bin/php-config')
+    phpscrewc=open('php_screw.c','r+')
+    update=phpscrewc.readlines()
+    update[123]='\tCG(compiler_options) |= ZEND_COMPILE_EXTENDED_INFO;\n'
+    update[132]='\tCG(compiler_options) |= ZEND_COMPILE_EXTENDED_INFO;\n'
+    phpscrewc=open('php_screw.c','w+')
+    phpscrewc.writelines(update)
+    phpscrewc.close()
+    os.system('make')
+    os.system('make install')
+def config():
+    output=open('/etc/php5/apache2/php.ini','a')
+    output.write('extension=/php_screw.so')
+    output.close()
+def insscrew():
+    os.chdir('tools')
+    os.system('mv screw /opt/')
+    os.system('ln -s /opt/screw /usr/bin/screw')
+    #os.chdir('..')
+    #os.chdir('..')
+def encrypt(serveDir):
+    path=serveDir
+    os.chdir(serveDir)
+    files=os.listdir(serveDir)
+    for f in files:
+        if os.path.isdir(f):
+            encrypt(path+'/'+f)
+            print 'open director:'+path+'/'+f
+        elif f[len(f)-4:len(f)]=='.php':
+            print 'encrypt:'+path+'/'+f
+            os.system('screw '+f)
+    os.chdir('..')
+def getroot():
+    if os.getuid():
+        print 'root password:'
+        args=[sys.executable]+sys.argv
+        os.execlp('su','su','-c',' '.join(args))
+if __name__=='__main__':
+    install()
+    config()
+    os.system('service apache2 restart')
+    insscrew()
+    encrypt('/var/www')
