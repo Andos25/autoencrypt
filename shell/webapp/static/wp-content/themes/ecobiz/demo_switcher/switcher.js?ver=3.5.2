@@ -1,0 +1,215 @@
+jQuery(document).ready(function($) {
+								  
+    var ecobiz_templateurl = jQuery('#ecobiz_templateurl').attr('href') + "/";
+	
+	var styleswitcherstr = ' \
+	<div id="style-switcher"> \
+	<form id="style-switcher-form">\
+	  <div id="style-switcher-heading"><a id="toggleswitcher" href="#"><h4>Style Switcher</h4></a></div>\
+	  <div class="switchercontainer"> \
+	  <span class="title">Predefined Skins</span> \
+	  <div class="clear"></div> \
+		<a rel="2888BF" class="color-box" href=""></a> \
+		<a rel="BF4C17" class="color-box" href=""></a> \
+		<a rel="2B2B2B" class="color-box" href=""></a> \
+		<a rel="DB8F00" class="color-box" href=""></a> \
+		<a rel="C71400" class="color-box" href=""></a> \
+		<a rel="669100" class="color-box" href=""></a> \
+		<div class="clear"></div> \
+  	</div> \
+	  <div class="switchercontainer"> \
+		  <span class="title">Custom Background Color</span> \
+		  <div class="clear"></div> \
+		  <div id="colorpicker" class="boxpicker"><div></div></div> \
+		  <div class="clear"></div> \
+	  </div> \
+	  <div class="switchercontainer"> \
+		  <span class="title">Patterns</span> \
+		  <div class="clear"></div> \
+		  <a rel="bokeh" class="bg-box" href=""></a> \
+		  <a rel="diagonal-line1" class="bg-box" href=""></a> \
+		  <a rel="diagonal-line2" class="bg-box" href=""></a> \
+		  <a rel="diagonal-line3" class="bg-box" href=""></a> \
+		  <a rel="dot" class="bg-box" href=""></a> \
+		  <a rel="flower-swirl1" class="bg-box" href=""></a> \
+		  <a rel="flower-swirl2" class="bg-box" href=""></a> \
+		  <a rel="flower-swirl3" class="bg-box" href=""></a> \
+		  <a rel="flower-swirl4" class="bg-box" href=""></a> \
+		  <a rel="flower-swirl5" class="bg-box" href=""></a> \
+		  <a rel="flower-swirl6" class="bg-box" href=""></a> \
+		  <a rel="flower-swirl7" class="bg-box" href=""></a> \
+		  <a rel="flower-swirl8" class="bg-box" href=""></a> \
+		  <a rel="flower-swirl9" class="bg-box" href=""></a> \
+		  <a rel="flower-swirl10" class="bg-box" href=""></a> \
+		  <a rel="grid1" class="bg-box" href=""></a> \
+		  <a rel="grid2" class="bg-box" href=""></a> \
+		  <a rel="grid3" class="bg-box" href=""></a> \
+		  <a rel="grid4" class="bg-box" href=""></a> \
+		  <a rel="grunge" class="bg-box" href=""></a> \
+		  <a rel="horizontal-line1" class="bg-box" href=""></a> \
+		  <a rel="horizontal-line2" class="bg-box" href=""></a> \
+		  <a rel="mozaic1" class="bg-box" href=""></a> \
+		  <a rel="mozaic2" class="bg-box" href=""></a> \
+		  <a rel="pixelite" class="bg-box" href=""></a> \
+		  <a rel="vertical-line1" class="bg-box" href=""></a> \
+		  <a rel="vertical-line2" class="bg-box" href=""></a> \
+		  <a rel="vertical-line3" class="bg-box" href=""></a> \
+		  <div class="clear"></div> \
+	  </div> \
+	  <div class="switchercontainer"> \
+		  <a href="#" id="switcher-reset">Reset</a> \
+		  <div class="clear"></div> \
+	  </div> \
+	  </form>\
+	</div> \
+	';
+	
+	jQuery("body").prepend( styleswitcherstr );
+	
+	jQuery("#toggleswitcher").click(function(e){
+		jQuery("#style-switcher").toggleClass("active");
+	});
+    
+	/*************** COLOR PICKER ******************/
+	
+	
+	jQuery('#colorpicker').ColorPicker({
+			onShow: function (colpkr) {
+				jQuery(colpkr).fadeIn("fast");
+				return false;
+			},
+			onHide: function (colpkr) {
+				jQuery(colpkr).fadeOut("fast");
+				return false;
+			},
+			onChange: function (hsb, hex, rgb) {
+			
+				var generalcolor = hex;
+				
+				jQuery('#colorpicker div').css('backgroundColor', '#' + hex);
+				jQuery('body').css({
+					backgroundColor: '#'+ generalcolor
+				});
+				
+				jQuery.cookie("imediapixel_cookie_generalcolor", generalcolor);  
+				
+			},
+      color: '#669100'
+	  
+    });
+	
+	jQuery('#colorpicker div').css('backgroundColor', '#669100');
+	
+	
+	/*************** END COLOR PICKER ******************/
+	
+	/*************** BACKGROUND COLOR BOX **************/
+	jQuery('#style-switcher a.color-box').each(function (i) {
+		var a = jQuery(this);
+		var color = $(this).attr('rel');
+		a.css({
+			backgroundColor:  '#' + color
+		})
+	});
+	/* Click */
+	var switcher_link = $('#skins-switcher');
+	jQuery('#style-switcher a.color-box').click(function (e) {
+	    e.preventDefault();
+	    var color = $(this).attr('rel');
+	    
+	    if(color == "2888BF") {
+	      switcher_link.attr('href',ecobiz_templateurl+'css/styles/blue.css');
+	      var atrrHref = switcher_link.attr('href');
+	    }
+	    
+	    if(color == "BF4C17") {
+	      switcher_link.attr('href',ecobiz_templateurl+'css/styles/brown.css');
+	      var atrrHref = switcher_link.attr('href');
+	    }
+	    
+	    if(color == "2B2B2B") {
+	      switcher_link.attr('href',ecobiz_templateurl+'css/styles/dark.css');
+	      var atrrHref = switcher_link.attr('href');
+	    }
+	    
+	    if(color == "DB8F00") {
+	      switcher_link.attr('href',ecobiz_templateurl+'css/styles/orange.css');
+	      var atrrHref = switcher_link.attr('href');
+	    }
+	    
+	    if(color == "C71400") {
+	      switcher_link.attr('href',ecobiz_templateurl+'css/styles/red.css');
+	      var atrrHref = switcher_link.attr('href');
+	    }
+	    
+	    if(color == "669100") {
+	      switcher_link.attr('href',ecobiz_templateurl+'css/styles/green.css');
+	      var atrrHref = switcher_link.attr('href');
+	    }
+	    
+	  jQuery.cookie("imediapixel_cookie_colorbox",atrrHref);
+	  Cufon.refresh();
+	});
+	/*************** BACKGROUND COLOR BOX END **************/
+	
+	/*************** BACKGROUND PATTERN BOX **************/
+	jQuery('#style-switcher a.bg-box').each(function (i) {
+		var backgroundUrl = 'url('+ecobiz_templateurl+'/images/pattern/' + jQuery(this).attr('rel') + '.png)';
+		var a = jQuery(this);
+		a.css({
+			backgroundImage: backgroundUrl,
+	  		backgroundRepeat: "repeat"
+		})
+		Cufon.refresh();
+	});
+	/* Click */
+  jQuery('#style-switcher a.bg-box').click(function (e) {
+      e.preventDefault();
+      var backgroundUrl = 'url('+ecobiz_templateurl+'/images/pattern/' + jQuery(this).attr('rel') + '.png)';
+      jQuery('body').css({
+          backgroundImage: backgroundUrl,
+          backgroundRepeat: "repeat"
+      });
+      
+    jQuery.cookie("imediapixel_cookie_bgimage",backgroundUrl);
+    Cufon.refresh();
+  });
+  /*************** BACKGROUND PATTERN BOX END **************/
+
+  var generalcolor 				= jQuery.cookie("imediapixel_cookie_generalcolor");
+  var backgroundColor	 		= jQuery.cookie("imediapixel_cookie_colorbox");
+  var backgroundPattern 		= jQuery.cookie("imediapixel_cookie_bgimage");
+  
+  
+  if(generalcolor){
+	  jQuery('#colorpicker div').css('backgroundColor', '#' + generalcolor );
+  }
+  
+  if (backgroundColor) {
+      $("#skins-switcher").attr("href",backgroundColor);
+  }
+  
+  if (backgroundPattern) {
+      jQuery('body').css({
+        backgroundImage: backgroundPattern,
+        backgroundRepeat: "repeat"
+      });
+  }
+  
+  jQuery("#switcher-reset").click(function(){
+		var generalcolor = "669100";
+		
+		jQuery('#colorpicker div').css('backgroundColor', '#669100');
+		
+		jQuery.cookie("imediapixel_cookie_generalcolor", generalcolor);// generalcolor cookie
+		
+		var backgroundUrl = 'url('+ecobiz_templateurl+'/images/pattern/grid2.png)';
+		jQuery('body').css({
+		  	backgroundImage: backgroundUrl,
+		  	backgroundRepeat: "repeat"
+	  	});
+		jQuery.cookie("imediapixel_cookie_bgimage",backgroundUrl);
+		
+  });
+         
+});   

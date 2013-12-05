@@ -1,0 +1,66 @@
+[ 2013-08-27T21:08:02+08:00 ] 127.0.0.1 /webapp/
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.010616s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.010925s ]
+SQL: SHOW COLUMNS FROM `think_data` [ RunTime:0.008723s ]
+SQL: SELECT * FROM `think_data`  [ RunTime:0.023766s ]
+ERR: 模板不存在[/home/andos/workspace/apache/webapp/Tpl/Index/index.html]
+
+[ 2013-08-27T21:08:02+08:00 ] 127.0.0.1 /webapp/
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.010646s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.010837s ]
+SQL: SHOW COLUMNS FROM `think_data` [ RunTime:0.008722s ]
+SQL: SELECT * FROM `think_data`  [ RunTime:0.023780s ]
+ERR: 模板不存在[/home/andos/workspace/apache/webapp/Tpl/Index/index.html]
+
+[ 2013-08-27T21:09:02+08:00 ] 127.0.0.1 /webapp/
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000301s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000385s ]
+
+[ 2013-08-27T21:09:03+08:00 ] 127.0.0.1 /webapp/
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000305s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000385s ]
+
+[ 2013-08-27T21:09:03+08:00 ] 127.0.0.1 /webapp/
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000371s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000469s ]
+
+[ 2013-08-27T21:09:03+08:00 ] 127.0.0.1 /webapp/
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000291s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000373s ]
+
+[ 2013-08-27T21:09:22+08:00 ] 127.0.0.1 /webapp/
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000276s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000350s ]
+ERR: 非法操作:index
+
+[ 2013-08-27T21:09:22+08:00 ] 127.0.0.1 /webapp/
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000229s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000287s ]
+ERR: 非法操作:index
+
+[ 2013-08-27T21:09:29+08:00 ] 127.0.0.1 /webapp/index.php/index.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.015698s ]
+INFO: [ route_check ] --END-- [ RunTime:0.015821s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000307s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000350s ]
+ERR: 无法加载模块:index
+
+[ 2013-08-27T21:12:33+08:00 ] 127.0.0.1 /webapp/index.php/index.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001377s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001606s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000375s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000433s ]
+ERR: 无法加载模块:index
+
