@@ -43,7 +43,7 @@ def encrypt(serveDir):
 def encryptwebsite():
     os.chdir(path)
     apppath=input('please input your webapp path')
-    if apppath=='':
+    if apppath='':
         apppath='/var/www'
     os.system('mv webapp '+apppath)
     os.system('chmod 777 -R '+apppath+'"webapp"')
