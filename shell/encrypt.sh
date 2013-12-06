@@ -12,10 +12,13 @@ Install()
     cd $php_screw_path
     phpize
     sed -i 's/^#define PM9SCREW .*$/#define PM9SCREW "GUOYUNDATA"/g' php_screw.h
-    ./configure --with-php-config=/usr/bin/php-config 
+    ./configure --with-php-config=/usr/ bin/php-config 
     sed -i 's/CG(extended_info) = 1;/CG(compiler_options) |= ZEND_COMPILE_EXTENDED_INFO;/g' php_screw.c
     sudo make
     sudo make install
+    sudo chmod 777 /etc/php5/apache2/php.ini
+    sudo echo "extension=php_screw.so" >> /etc/php5/apache2/php.ini
+    sudo service apache2 restart
 }
 
 CreateLink()
