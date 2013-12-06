@@ -3,6 +3,7 @@
 import os
 import sys
 def install():
+    path=os.getcwd()
     os.system('tar -zxvf php_screw-1.5.tar.gz')
     getroot()
     os.chdir('php_screw-1.5')
@@ -39,6 +40,13 @@ def encrypt(serveDir):
             print 'encrypt:'+path+'/'+f
             os.system('screw '+f)
     os.chdir('..')
+def encryptwebsite():
+    os.chdir(path)
+    apppath=input('please input your webapp path')
+    if apppath=='':
+        apppath='/var/www'
+    os.system('mv webapp '+apppath)
+    os.system('chmod 777 -R '+apppath+'"webapp"')
 def getroot():
     if os.getuid():
         print 'root password:'
