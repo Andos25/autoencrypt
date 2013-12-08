@@ -23,7 +23,7 @@ def install():
     os.system('make install')
 def config():
     output=open('/etc/php5/apache2/php.ini','a')
-    output.write('extension=/php_screw.so')
+    output.write('extension=php_screw.so')
     output.close()
 def insscrew():
     os.chdir(filepath+'/php_screw-1.5/tools')
