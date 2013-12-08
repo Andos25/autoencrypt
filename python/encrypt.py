@@ -2,20 +2,23 @@
 #-*- coding: utf-8 -*-
 import os
 import sys
-def install():
-    path=os.getcwd()
-    os.system('tar -zxvf php_screw-1.5.tar.gz')
+def init():
     getroot()
+    global filepath
+    filepath=os.getcwd()
+    global apppath
+    apppath=raw_input('please input your webapp path(defauult:/var/www)')
+    if apppath=='':
+        apppath='/var/www/'
+def install():
+    os.system('tar -zxvf php_screw-1.5.tar.gz')
     os.chdir('php_screw-1.5')
+    fileedit('php_screw.h',0,"#define PM9SCREW        \""+"guoyun"+"\"\n")
+    fileedit('php_screw.h',1,"#define PM9SCREW_LEN     "+"6"+'\n')
     os.system('phpize')
     os.system('./configure --with-php-config=/usr/bin/php-config')
-    phpscrewc=open('php_screw.c','r+')
-    update=phpscrewc.readlines()
-    update[123]='\tCG(compiler_options) |= ZEND_COMPILE_EXTENDED_INFO;\n'
-    update[132]='\tCG(compiler_options) |= ZEND_COMPILE_EXTENDED_INFO;\n'
-    phpscrewc=open('php_screw.c','w+')
-    phpscrewc.writelines(update)
-    phpscrewc.close()
+    fileedit('php_screw.c',123,'\tCG(compiler_options) |= ZEND_COMPILE_EXTENDED_INFO;\n')
+    fileedit('php_screw.c',132,'\tCG(compiler_options) |= ZEND_COMPILE_EXTENDED_INFO;\n')
     os.system('make')
     os.system('make install')
 def config():
@@ -23,11 +26,10 @@ def config():
     output.write('extension=/php_screw.so')
     output.close()
 def insscrew():
-    os.chdir('tools')
+    os.chdir(filepath+'/php_screw-1.5/tools')
+    os.system('make')
     os.system('mv screw /opt/')
     os.system('ln -s /opt/screw /usr/bin/screw')
-    #os.chdir('..')
-    #os.chdir('..')
 def encrypt(serveDir):
     path=serveDir
     os.chdir(serveDir)
@@ -39,12 +41,10 @@ def encrypt(serveDir):
         elif f[len(f)-4:len(f)]=='.php':
             print 'encrypt:'+path+'/'+f
             os.system('screw '+f)
+            os.remove(f+'.screw')
     os.chdir('..')
 def encryptwebsite():
-    os.chdir(path)
-    apppath=input('please input your webapp path')
-    if apppath=='':
-        apppath='/var/www'
+    os.chdir(filepath)
     os.system('mv webapp '+apppath)
     os.system('chmod 777 -R '+apppath+'"webapp"')
 def getroot():
@@ -52,9 +52,21 @@ def getroot():
         print 'root password:'
         args=[sys.executable]+sys.argv
         os.execlp('su','su','-c',' '.join(args))
+def clean():
+    os.system("rm -r "+filepath+" ")
+def fileedit(fname,line,ncontent):
+    ufile=open(fname,'r+')
+    update=ufile.readlines()
+    update[line]=ncontent
+    ufile=open(fname,'w+')
+    ufile.writelines(update)
+    ufile.close()
 if __name__=='__main__':
+    init()
     install()
     config()
     os.system('service apache2 restart')
     insscrew()
-    encrypt('/var/www')
+    encrypt(filepath+'/webapp')
+    encryptwebsite()
+    clean()
